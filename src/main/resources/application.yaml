@@ -7,7 +7,7 @@ spring:
   cloud:
     config:
       discovery:
-        # 2순위: 직접 접속 실패 시 Eureka를 통해 'config-server'를 찾음
+        # 2순위: 직접 접속 실패   시 Eureka를 통해 'config-server'를 찾음
         enabled: true
         service-id: config-server
   profiles:
