@@ -2,7 +2,9 @@ package com.fhsh.daitda.slack.domain.entity;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
+
 import com.fhsh.daitda.domain.BaseEntity;
+
 import jakarta.persistence.*;
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
@@ -51,4 +53,10 @@ public class SlackMessage extends BaseEntity { // 기존에 사용하시던 Audi
 		this.isSent = true;
 		this.sentAt = LocalDateTime.now();
 	}
+
+	// 추가: 상태 조회를 위해
+	public String getStatus() {
+		return isSent ? "SUCCESS" : "PENDING";
+	}
+
 }
