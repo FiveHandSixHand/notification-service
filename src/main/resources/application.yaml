@@ -14,7 +14,7 @@ spring:
     active: ${PROFILE}
 
   slack:
-    token: xoxb-10052753584400-10849024023778-zJMlyqNiWLXF2WENxFzLVKHJ
+    token: {SLACK_TOKEN}
     channel:
       id: C0AMVTEAF44
 
