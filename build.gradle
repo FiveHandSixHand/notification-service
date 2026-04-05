@@ -32,6 +32,7 @@ ext {
 }
 
 dependencies {
+	//다있다 임플
 	implementation 'com.fhsh.daitda:common:0.1.2-SNAPSHOT'
     // 슬랙 api 임플
 	implementation 'com.slack.api:slack-api-client:1.38.0'
