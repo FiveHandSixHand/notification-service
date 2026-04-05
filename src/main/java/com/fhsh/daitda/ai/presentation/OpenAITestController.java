@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fhsh.daitda.ai.application.OpenAIService;
+import com.fhsh.daitda.ai.application.dto.LogisticsPrediction;
 
 import lombok.RequiredArgsConstructor;
 
@@ -18,7 +19,7 @@ public class OpenAITestController {
 	private final OpenAIService openAIService;
 
 	@GetMapping
-	public String responseTest(@RequestParam UUID orderId) {
+	public LogisticsPrediction responseTest(@RequestParam UUID orderId) {
 		return openAIService.refineLogisticsMessage(orderId);
 	}
 

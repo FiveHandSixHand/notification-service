@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.fhsh.daitda.ai.application.client.OrderClient;
 import com.fhsh.daitda.ai.application.client.dto.OrderClientResponse;
+import com.fhsh.daitda.ai.application.dto.LogisticsPrediction;
 
 @Service
 public class OpenAIService {
@@ -25,24 +26,15 @@ public class OpenAIService {
 		 - 요청: {requestMessage}
 		 - 배송: {deliveryId}
 
-		 위 데이터를 바탕으로 요약해줘.
+		 위 데이터를 바탕으로 데이터를 분석해서 정해진 형식으로 출력해줘.
     """;
 
 	private static String systemInstruction = """
-        너는 전문 물류 데이터 요약 및 예상 시간 계산이 필요해. 
-        아래 경로에 대한 거리와 예상 시간을 보고 예상 도착 시간을 구해줘.
-        제공된 주문 정보를 바탕으로 아래 [출력 양식]에 맞춰 요약해줘.
-        단, 데이터가 null이거나 비어있는 항목은 null이라고 표시해줘.
-        
-        
-        ### 출력 양식 ###
-        주문 번호 : {orderId}
-        주문자 정보 : {orderer}
-        주문 시간 : {orderAt}
-        상품 정보 : {products}
-        요청 사항 : {requestMessage}
-        배송 번호 : {deliveryId}
-        예상 시간 : {estimatedTime}
+		당신은 대한민국 물류 전문가입니다.
+		입력된 [주문 시간]과 [도착 희망 시각]을 분석하여,
+		한국 내 간선 하차 및 허브(옥천, 대전 등) 경유 시간을 고려한
+		'현실적인 최종 발송 시한'을 예측하세요.
+		현재 위치는 대한민국(KST)입니다.
         """;
 
 	public OpenAIService(ChatClient.Builder builder, OrderClient orderClient) {
@@ -50,7 +42,7 @@ public class OpenAIService {
 		this.orderClient = orderClient;
 	}
 
-	public String refineLogisticsMessage(UUID orderId) {
+	public LogisticsPrediction refineLogisticsMessage(UUID orderId) {
 		OrderClientResponse res = orderClient.getOrder(orderId);
 		return chatClient.prompt()
 			.system(systemInstruction)
@@ -63,7 +55,7 @@ public class OpenAIService {
 				.param("deliveryId", res.deliveryId() != null ? res.deliveryId().toString() : "미정")
 			)
 			.call()
-			.content();
+			.entity(LogisticsPrediction.class);
 	}
 
 	private String formatProducts(List<OrderClientResponse.OrderItemInfo> infos) {
