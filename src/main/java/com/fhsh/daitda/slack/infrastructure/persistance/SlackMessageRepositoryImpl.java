@@ -1,15 +1,16 @@
 package com.fhsh.daitda.slack.infrastructure.persistence;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
+import org.springframework.stereotype.Repository;
+
 import com.fhsh.daitda.slack.domain.entity.SlackMessage;
 import com.fhsh.daitda.slack.domain.repository.SlackMessageRepository;
 import com.fhsh.daitda.slack.infrastructure.persistance.JpaSlackMessageRepository;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
-
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
 
 @Repository
 @RequiredArgsConstructor

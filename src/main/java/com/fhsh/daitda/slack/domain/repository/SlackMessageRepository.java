@@ -1,9 +1,10 @@
 package com.fhsh.daitda.slack.domain.repository;
 
-import com.fhsh.daitda.slack.domain.entity.SlackMessage;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.List;
+
+import com.fhsh.daitda.slack.domain.entity.SlackMessage;
 
 public interface SlackMessageRepository {
 

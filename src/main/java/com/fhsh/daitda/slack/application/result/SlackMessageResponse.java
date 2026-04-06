@@ -1,10 +1,12 @@
 package com.fhsh.daitda.slack.application.result;
 
-import com.fhsh.daitda.slack.domain.entity.SlackMessage;
-import lombok.Builder;
-import lombok.Getter;
 import java.time.LocalDateTime;
 import java.util.UUID;
+
+import com.fhsh.daitda.slack.domain.entity.SlackMessage;
+
+import lombok.Builder;
+import lombok.Getter;
 
 @Getter
 @Builder
